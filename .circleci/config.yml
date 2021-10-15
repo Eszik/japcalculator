@@ -55,5 +55,6 @@ jobs:
 workflows:
   node-tests:
     jobs:
+      - lint
       - test-and-build
       - audit
