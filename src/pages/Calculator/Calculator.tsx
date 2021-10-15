@@ -58,6 +58,8 @@ export const CalculatorPage: React.FC<Props> = (props: Props) => {
     return acc + values[itemName].kcal;
   }, 0);
 
+  const a: any = undefined;
+
   return (
     <div className={classes.container}>
       <div className={classes.calculatorContainer}>
@@ -87,6 +89,7 @@ export const CalculatorPage: React.FC<Props> = (props: Props) => {
             <Button variant="contained" onClick={resetValues}>
               Remettre à zéro
             </Button>
+            <Button variant="contained">{a.test}</Button>
           </div>
         </div>
         <div className={classes.lateralBar}>
