@@ -10,7 +10,6 @@ jobs:
     steps:
       - checkout
       
-      - run: curl -o- -L https://npmjs.org/install.sh | bash
       - run: npm install -g eslint eslint-config-react-app
 
       - run: eslint ./src
