@@ -1,5 +1,7 @@
 version: 2.1
 
+
+
 jobs:
   lint:
     docker:
@@ -7,21 +9,11 @@ jobs:
     
     steps:
       - checkout
-
-      - restore_cache:
-          keys:
-            - deps-{{ checksum "package.json"}}
       
-      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
-      - run: yarn install
+      - run: curl -o- -L https://npmjs.org/install.sh | bash
+      - run: npm install -g eslint eslint-config-react-app
 
-      - save_cache:
-              paths:
-                    - node_modules
-              key: deps-{{ checksum "package.json" }}
-
-      - run: yarn add eslint
-      - run: yarn run eslint ./src
+      - run: eslint ./src
 
   test-and-build:
     docker:
