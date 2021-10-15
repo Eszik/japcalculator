@@ -8,8 +8,19 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+            - deps-{{ checksum "package.json"}}
+      
       - run: curl -o- -L https://yarnpkg.com/install.sh | bash
-      - run: yarn add eslint eslint-config-react-app
+      - run: yarn install
+
+      - save_cache:
+              paths:
+                    - node_modules
+              key: deps-{{ checksum "package.json" }}
+
+      - run: yarn add eslint
       - run: yarn run eslint ./src
 
   test-and-build:
