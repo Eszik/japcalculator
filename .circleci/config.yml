@@ -1,6 +1,26 @@
 version: 2.1
 
 jobs:
+  lint:
+    docker:
+      - image: circleci/node:14
+    
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - deps-{{ checksum "package.json"}}
+
+      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
+      - run: yarn install
+
+      - save_cache:
+              paths:
+                    - node_modules
+              key: deps-{{ checksum "package.json" }}
+
+      - run: eslint ./src
+
   test-and-build:
     docker:
       - image: circleci/node:14
@@ -34,5 +54,6 @@ jobs:
 workflows:
   node-tests:
     jobs:
+      - lint
       - test-and-build
       - audit
