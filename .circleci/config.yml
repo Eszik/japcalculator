@@ -9,9 +9,7 @@ jobs:
       - checkout
 
       - run: curl -o- -L https://yarnpkg.com/install.sh | bash
-      - run: yarn global add eslint
-
-      - run: eslint ./src
+      - run: yarn run eslint ./src
 
   test-and-build:
     docker:
