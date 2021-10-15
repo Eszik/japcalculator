@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -9,6 +11,16 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import { store } from "./redux/config";
 import { history } from "./redux/Router/router";
 import { theme } from "./style/theme";
+
+Sentry.init({
+  dsn: "https://28b84c3ef97c40ad80ae5ea7aa2742a1@o1040149.ingest.sentry.io/6009064",
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 ReactDOM.render(
   <Provider store={store}>

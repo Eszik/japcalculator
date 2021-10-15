@@ -87,6 +87,15 @@ export const CalculatorPage: React.FC<Props> = (props: Props) => {
             <Button variant="contained" onClick={resetValues}>
               Remettre à zéro
             </Button>
+            <Button
+              variant="contained"
+              onClick={() => {
+                const a: any[] = [];
+                return a[3].test;
+              }}
+            >
+              Tout casser
+            </Button>
           </div>
         </div>
         <div className={classes.lateralBar}>
