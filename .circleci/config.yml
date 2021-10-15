@@ -9,7 +9,7 @@ jobs:
       - checkout
 
       - run: curl -o- -L https://yarnpkg.com/install.sh | bash
-      - run: yarn add eslint
+      - run: yarn add eslint eslint-config-react-app
       - run: yarn run eslint ./src
 
   test-and-build:
