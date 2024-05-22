@@ -3,38 +3,10 @@ const faunadb = require("faunadb"); /* Import faunaDB sdk */
 /* configure faunaDB Client with our secret */
 const q = faunadb.query;
 const client = new faunadb.Client({
-  secret: "fnAEWI_snmACSWzPFi7x1Tyoeav083DKsHciUTAk",
+  secret: process.env.FAUNADB_SERVER_SECRET,
 });
 
 exports.handler = async function (event, context) {
-  console.log("Create the database!");
-
-  /* Based on your requirements, change the schema here */
-  await client
-    .query(q.Create(q.Ref("classes"), { name: "todos" }))
-    .then(() => {
-      return client.query(
-        q.Create(q.Ref("indexes"), {
-          name: "all_todos",
-          source: q.Ref("classes/todos"),
-        })
-      );
-    })
-    .catch((e) => {
-      // Database already exists
-      if (
-        e.requestResult.statusCode === 400 &&
-        e.message === "instance not unique"
-      ) {
-        console.log("DB already exists");
-        throw e;
-      }
-    });
-
-  if (!event.body) {
-    return;
-  }
-
   const data = JSON.parse(event.body);
   console.log("Function `todo-create` invoked", data);
   const todoItem = {
